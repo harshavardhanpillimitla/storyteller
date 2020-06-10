@@ -7,7 +7,8 @@ class Move extends Component{
     render(){
 
         return(
-            <button></button>
+            <button>Up</button>
+            <button>down</button>
         )
 
 
