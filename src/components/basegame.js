@@ -14,7 +14,8 @@ class BaseGame extends Component
         right:false,
         currentstate:'',
         bridgestate:'0',
-        nextstate:''
+        nextstate:'',
+        directiion:0
 
 
     }
@@ -64,19 +65,34 @@ class BaseGame extends Component
           
           if((this.props.game.gamestate[parseInt(detail[0])]!=='0')&&(this.props.game.gamestate[parseInt(detail[0])]===this.props.game.playerchance) )
           {
-                 
+            
+            if(this.props.game.killer===99)
+            {     
             upmove  = this.nextmove(up,1);
             downmove = this.nextmove(down,2);
             rightmove= this.nextmove(right,3);
             leftmove = this.nextmove(left,4);
+            alert("no killer")
+            }
+            else 
+            {
+              if(this.props.game.killer===detail[0])
+              {
+                alert(this.props.game.killer===detail[0])
+                upmove  = this.nextmove(up,1);
+                downmove = this.nextmove(down,2);
+                rightmove= this.nextmove(right,3);
+                leftmove = this.nextmove(left,4);
+
+              }
+              
+
+            }
 
 
 
 
-                // if( (this.props.game.gamestate[up]==='0')||((this.props.game.gamestate[up]==='1')&&this.nextstrike(up,1)) )
-                // {
-                //   upmove=true;
-                // }
+                
                 
           }
           else
@@ -123,7 +139,7 @@ class BaseGame extends Component
         }
 
 
-          console.log("values",pos,posdir,this.props.game.gamestate[parseInt(detail[0])],detail[0],detail)
+          // console.log("values",pos,posdir,this.props.game.gamestate[parseInt(detail[0])],detail[0],detail)
           if( this.props.game.gamestate[parseInt(detail[0])]==='0' )
           {
               this.setState({...this.state,place:f});
@@ -139,11 +155,11 @@ class BaseGame extends Component
           {
               //up has player
               
-              if((this.props.game.gamestate[posdir]!=="0") && (this.props.game.playerchance==='2'))
+              if((this.props.game.gamestate[posdir]!=="0") && (this.props.game.playerchance==='2') )
               {
                 
                   let decision=this.props.game.boxes[posdir].split(",");
-                  console.log("decision ",decision);
+                  // console.log("decision ",decision);
                   if(this.props.game.gamestate[parseInt(decision[pos])]==='0')
                   {
                       this.setState({...this.state,currentstate:detail[0],nextstate:decision[pos],bridgestate:detail[pos]});
@@ -155,9 +171,9 @@ class BaseGame extends Component
 
               }else 
               {
-                //up doesnt have player we can move
-                this.setState({...this.state,currentstate:detail[0],nextstate:detail[pos]})
-
+                //up doesnt have player we can move\
+                
+                this.setState({...this.state,currentstate:detail[0],nextstate:detail[pos]});
                 alert("you can move one step above")
 
               }
@@ -190,7 +206,23 @@ class BaseGame extends Component
       abc =() => {
         // console.log(this.state);
         this.winner();
-        this.props.gamechange(this.state);
+        if(this.props.game.killer===99)
+        {
+          this.props.gamechange(this.state);
+          this.setState({...this.state,place:false,up:false,down:false,left:false,
+            right:false,
+            currentstate:'',
+            bridgestate:'0',
+            nextstate:''});
+
+        }
+        else if(this.props.game.killer===this.state.boxclicked.split(",")[0])
+        {
+          this.props.gamechange(this.state);
+
+        }
+        
+        
         
 
       }
@@ -199,7 +231,14 @@ class BaseGame extends Component
         let decision=this.props.game.boxes[index].split(",");
         // console.log("decision ",decision);
         if(this.props.game.gamestate[parseInt(decision[direct])]==='0')
-        return  true;
+        {
+            if(decision[0]!=='1')
+            {
+              return  true;
+
+            }
+        }
+        
         else
         return false;
            
@@ -241,6 +280,7 @@ class BaseGame extends Component
       nextmove =(direction,value)=>{
         if( (this.props.game.gamestate[direction]==='0')||((this.props.game.gamestate[direction]==='1')&&this.nextstrike(direction,value)) )
         {
+          
          return true;
         }
       }

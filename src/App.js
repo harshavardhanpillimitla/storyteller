@@ -27,7 +27,7 @@ class App extends Component{
       "15,9,20,16,14",
       "16,10,22,17,15",
       "17,11,22,18,16",
-      "18,12,23,19,,17",
+      "18,12,23,19,17",
       "19,13,0,0,18",
       "20,15,0,21,0",
       "21,16,0,22,0",
@@ -35,15 +35,17 @@ class App extends Component{
       "23,18,0,0,22"
 
     ],
-    gamestate:['012','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
+    gamestate:['012','2','0','0','2','2','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
     meks:['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
     puls:['0','0','0'],
     availablemaks:15,
-    availablepuls:3,
+    availablepuls:0,
     currentmaks:0,
-    currentpuls:0,
+    currentpuls:3,
     playermove:'0',
-    kill:0
+    kill:0,
+    
+killer:99
 
 
 
@@ -54,21 +56,24 @@ class App extends Component{
     let detail=basestate.boxclicked.split(",");
     let currentstate=basestate.currentstate;
     let nextstate = basestate.nextstate;
+    
     let bridgestate=basestate.bridgestate;
     let gameplay=this.state.gamestate.map(state => {return state});
     let pulstate = this.state.puls.map(state => {return state});
     let currentplayer =this.state.playerchance;
     let currentplayerstatus =this.state.playerchance;
-    let avlm,curm,avlp,crp,k,kill;
+    let avlm,curm,avlp,crp,k,kill=this.state.kill,justkilled,killer=99;
+    let a=99;
+    this.setState({...this.state,killer:a})
     
     if(gameplay[parseInt(detail[0])]==='0')
     {
-      console.log(currentplayer,this.state)
+      // console.log(currentplayer,this.state)
       if((currentplayer==='1') && (this.state.availablemaks!==0))
       {
         avlm=this.state.availablemaks-1;
         curm=this.state.currentmaks+1;
-        console.log("sate avlm",this.state.currentmaks);
+        // console.log("sate avlm",this.state.currentmaks);
         avlm=avlm;
         curm=curm;
 
@@ -92,7 +97,7 @@ class App extends Component{
           
           this.setState({...this.state,playerchance:'1',availablepuls:avlp,currentpuls:crp});
          
-          console.log(this.state.playerchance,1);
+          // console.log(this.state.playerchance,1);
 
 
         }
@@ -119,6 +124,7 @@ class App extends Component{
         {
           k=this.state.kill;
           kill=k+1;
+          justkilled=true;
           gameplay[parseInt(bridgestate)]='0';
 
         }
@@ -129,11 +135,25 @@ class App extends Component{
           nextchance='2';
         }
         else{
+          if(!justkilled){
+            nextchance='1';
+
+          }
+          else
+          {
+            if(this.playerkillchancebonus(parseInt(nextstate)))
+            {
+              nextchance='2';
+              justkilled=false;
+              killer=nextstate;
+
+            }
+          }
           
-          nextchance='1';
+          
           
         }
-        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay,kill});
+        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay,kill:kill,killer:killer});
 
       }
     }
@@ -157,6 +177,37 @@ class App extends Component{
     }
     
     
+  }
+
+
+  playerkillchancebonus = (nextstate)=>
+  {
+    let decision=this.state.boxes[nextstate].split(",");
+    let index;
+    let returnvalue=false;
+    decision.map(item => {
+      if(item!=="0")
+      {
+        console.log(item);
+
+          if( (this.state.gamestate[parseInt(item)]!=="0") ||  (this.state.gamestate[parseInt(item)]!=="2") )
+          {
+            index=decision.indexOf(item);
+            if(this.state.boxes[parseInt(item)].split(",")[index]==="0")
+            {
+              returnvalue=true;
+
+            }
+            
+
+          }
+    }
+     
+      
+    });
+    
+    return returnvalue;
+
   }
 
 
