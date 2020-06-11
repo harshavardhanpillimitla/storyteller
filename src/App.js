@@ -9,9 +9,9 @@ class App extends Component{
   state={
     playerchance:'1',
     boxes:[
-      "0,0,0,0,0",
+      "0,012,012,012,012",
       "1,3,4,5,6",
-      "2,0,8,3,0",
+      "2,1,8,3,0",
       "3,1,9,4,2",
       "4,1,10,5,3",
       "5,1,11,6,4",
@@ -35,14 +35,15 @@ class App extends Component{
       "23,18,0,0,22"
 
     ],
-    gamestate:['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
+    gamestate:['012','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
     meks:['0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'],
     puls:['0','0','0'],
     availablemaks:15,
     availablepuls:3,
     currentmaks:0,
     currentpuls:0,
-    playermove:'0'
+    playermove:'0',
+    kill:0
 
 
 
@@ -55,9 +56,10 @@ class App extends Component{
     let nextstate = basestate.nextstate;
     let bridgestate=basestate.bridgestate;
     let gameplay=this.state.gamestate.map(state => {return state});
+    let pulstate = this.state.puls.map(state => {return state});
     let currentplayer =this.state.playerchance;
     let currentplayerstatus =this.state.playerchance;
-    let avlm,curm,avlp,crp;
+    let avlm,curm,avlp,crp,k,kill;
     
     if(gameplay[parseInt(detail[0])]==='0')
     {
@@ -69,6 +71,7 @@ class App extends Component{
         console.log("sate avlm",this.state.currentmaks);
         avlm=avlm;
         curm=curm;
+
         
         gameplay[parseInt(detail[0])]=currentplayer;
         this.setState({...this.state,playerchance:'2',availablemaks:avlm,currentmaks:curm});
@@ -86,6 +89,7 @@ class App extends Component{
           avlp=this.state.availablepuls-1;
           crp=this.state.currentpuls+1
           gameplay[parseInt(detail[0])]=currentplayer;
+          
           this.setState({...this.state,playerchance:'1',availablepuls:avlp,currentpuls:crp});
          
           console.log(this.state.playerchance,1);
@@ -113,7 +117,10 @@ class App extends Component{
         let nextchance;
         if(bridgestate!=='0')
         {
+          k=this.state.kill;
+          kill=k+1;
           gameplay[parseInt(bridgestate)]='0';
+
         }
         gameplay[parseInt(currentstate)]='0';
         gameplay[parseInt(nextstate)]=playerid;
@@ -122,10 +129,11 @@ class App extends Component{
           nextchance='2';
         }
         else{
+          
           nextchance='1';
           
         }
-        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay});
+        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay,kill});
 
       }
     }

@@ -7,8 +7,7 @@ class Move extends Component{
     render(){
 
         return(
-            <button>Up</button>
-            <button>down</button>
+        <p className="alert alert-primary" > {this.props.message}</p>
         )
 
 
@@ -17,3 +16,4 @@ class Move extends Component{
 
 
 }
+export default Move;
