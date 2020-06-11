@@ -209,12 +209,7 @@ class BaseGame extends Component
         if(this.props.game.killer===99)
         {
           this.props.gamechange(this.state);
-          this.setState({...this.state,place:false,up:false,down:false,left:false,
-            right:false,
-            currentstate:'',
-            bridgestate:'0',
-            nextstate:''});
-
+          
         }
         else if(this.props.game.killer===this.state.boxclicked.split(",")[0])
         {

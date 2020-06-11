@@ -141,6 +141,7 @@ killer:99
           }
           else
           {
+            alert(this.playerkillchancebonus(parseInt(nextstate)))
             if(this.playerkillchancebonus(parseInt(nextstate)))
             {
               nextchance='2';
@@ -191,11 +192,11 @@ killer:99
     let index;
     let returnvalue=false;
     decision.map(item => {
-      if(item!=="0")
+      if((item!=="0")&&(item!==decision[0]))
       {
         console.log(item);
 
-          if( (this.state.gamestate[parseInt(item)]!=="0") ||  (this.state.gamestate[parseInt(item)]!=="2") )
+          if( this.state.gamestate[parseInt(item)]==="1" )
           {
             index=decision.indexOf(item);
             if(this.state.boxes[parseInt(item)].split(",")[index]==="0")
