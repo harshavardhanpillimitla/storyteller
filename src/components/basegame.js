@@ -72,13 +72,13 @@ class BaseGame extends Component
             downmove = this.nextmove(down,2);
             rightmove= this.nextmove(right,3);
             leftmove = this.nextmove(left,4);
-            alert("no killer")
+            // alert("no killer")
             }
             else 
             {
               if(this.props.game.killer===detail[0])
               {
-                alert(this.props.game.killer===detail[0])
+                // alert(this.props.game.killer===detail[0])
                 upmove  = this.nextmove(up,1);
                 downmove = this.nextmove(down,2);
                 rightmove= this.nextmove(right,3);
@@ -164,7 +164,7 @@ class BaseGame extends Component
                   {
                       this.setState({...this.state,currentstate:detail[0],nextstate:decision[pos],bridgestate:detail[pos]});
 
-                      alert("up available");
+                      alert("kill available");
                   }
                   else this.setState({...this.state,up:f});
 

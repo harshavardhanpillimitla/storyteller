@@ -82,7 +82,7 @@ killer:99
         this.setState({...this.state,playerchance:'2',availablemaks:avlm,currentmaks:curm});
         if(this.state.availablepuls===0)
         {
-          alert("you have to move your puli");
+          // alert("you have to move your puli");
         }
        
 
