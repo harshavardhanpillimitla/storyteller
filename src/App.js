@@ -148,6 +148,11 @@ killer:99
               killer=nextstate;
 
             }
+            else
+            {
+              nextchance='1';
+
+            }
           }
           
           
