@@ -328,7 +328,7 @@ class BaseGame extends Component
       {this.state.down &&  <button onClick={this.ButtonClick.bind(this)}value="down">down</button>}
       {this.state.right &&  <button onClick={this.ButtonClick.bind(this)}value="right">Right</button>}
       {this.state.left &&  <button onClick={this.ButtonClick.bind(this)}value="left">left</button>}
-      {true && <button onClick={this.abc.bind(this)} value="place">changemove</button>}
+      { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button onClick={this.abc.bind(this)} value="place">changemove</button>}
 
       </React.Fragment>
         )
