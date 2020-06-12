@@ -5,9 +5,13 @@ class Move extends Component{
 
 
     render(){
+         console.log(this.props.message,this.props.player)
 
         return(
-        <p className="alert alert-primary" > {this.props.message}</p>
+        <div className="alert alert-primary" >
+        <p > message  :{this.props.message}   </p>
+        <p>playerid:{this.props.player==="1"?"mekha":"puli"}</p>
+        </div>
         )
 
 

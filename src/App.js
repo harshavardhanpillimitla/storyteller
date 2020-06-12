@@ -141,7 +141,7 @@ killer:99
           }
           else
           {
-            alert(this.playerkillchancebonus(parseInt(nextstate)))
+            // alert(this.playerkillchancebonus(parseInt(nextstate)))
             if(this.playerkillchancebonus(parseInt(nextstate)))
             {
               nextchance='2';
@@ -194,7 +194,7 @@ killer:99
     decision.map(item => {
       if((item!=="0")&&(item!==decision[0]))
       {
-        console.log(item);
+        // console.log(item);
 
           if( this.state.gamestate[parseInt(item)]==="1" )
           {

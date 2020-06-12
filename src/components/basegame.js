@@ -15,7 +15,8 @@ class BaseGame extends Component
         currentstate:'',
         bridgestate:'0',
         nextstate:'',
-        directiion:0
+        directiion:0,
+        message:''
 
 
     }
@@ -48,7 +49,8 @@ class BaseGame extends Component
         right:false,
         currentstate:'',
         bridgestate:'0',
-        nextstate:''
+        nextstate:'',
+        message:''
 
 
     };
@@ -112,8 +114,10 @@ class BaseGame extends Component
 
       ButtonClick =e =>
       {
+        let message;
          let det=this.state.boxclicked;
          let detail = det.split(",");
+
         
           let up = parseInt(detail[1]);
           let down = parseInt(detail[2]);
@@ -147,24 +151,31 @@ class BaseGame extends Component
                 right:false,
                 currentstate:'',
                 bridgestate:'0',
-                nextstate:''});
+                nextstate:'',
+              message:''});
               this.props.gamechange(this.state);
               
           }
           else
           {
               //up has player
+              if(detail[0]==='1'){
+                posdir=down;
+              }
               
               if((this.props.game.gamestate[posdir]!=="0") && (this.props.game.playerchance==='2') )
               {
                 
                   let decision=this.props.game.boxes[posdir].split(",");
+
                   // console.log("decision ",decision);
                   if(this.props.game.gamestate[parseInt(decision[pos])]==='0')
                   {
-                      this.setState({...this.state,currentstate:detail[0],nextstate:decision[pos],bridgestate:detail[pos]});
+                      message="kill available";
+                      this.setState({...this.state,currentstate:detail[0],nextstate:decision[pos],bridgestate:detail[pos],message});
 
-                      alert("kill available");
+                      // alert("kill available");
+                      
                   }
                   else this.setState({...this.state,up:f});
 
@@ -172,9 +183,9 @@ class BaseGame extends Component
               }else 
               {
                 //up doesnt have player we can move\
-                
+                message="you can move one step above";
                 this.setState({...this.state,currentstate:detail[0],nextstate:detail[pos]});
-                alert("you can move one step above")
+                // alert("you can move one step above")
 
               }
             
@@ -200,7 +211,7 @@ class BaseGame extends Component
         
         
       
-
+       
 
       }
       abc =() => {
@@ -361,9 +372,13 @@ class BaseGame extends Component
 
       {this.state.up && <button onClick={this.ButtonClick.bind(this) } value="up">Up</button>}
       {this.state.down &&  <button onClick={this.ButtonClick.bind(this)}value="down">down</button>}
-      {this.state.right &&  <button onClick={this.ButtonClick.bind(this)}value="right">Right</button>}
       {this.state.left &&  <button onClick={this.ButtonClick.bind(this)}value="left">left</button>}
+      {this.state.right &&  <button onClick={this.ButtonClick.bind(this)}value="right">Right</button>}
+      
       { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button onClick={this.abc.bind(this)} value="place">changemove</button>}
+
+
+      <Move message={this.state.message} player={this.props.game.playerchance}/>
 
       </React.Fragment>
         )
