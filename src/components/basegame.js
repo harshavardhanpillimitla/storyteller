@@ -57,39 +57,33 @@ class BaseGame extends Component
             this.setState(initial);
           let detail=e.target.id.split(",");
           let place;
+          
           let up = parseInt(detail[1]);
           let down = parseInt(detail[2]);
           let right = parseInt(detail[3]);
           let left = parseInt(detail[4]);
           let upmove=false,downmove=false,rightmove=false,leftmove=false;
+          let direction1=1,direction2=2,direction3=3,direction4=4;
+        
           
           
           
           if((this.props.game.gamestate[parseInt(detail[0])]!=='0')&&(this.props.game.gamestate[parseInt(detail[0])]===this.props.game.playerchance) )
           {
-            
-            if(this.props.game.killer===99)
-            {     
-            upmove  = this.nextmove(up,1);
-            downmove = this.nextmove(down,2);
-            rightmove= this.nextmove(right,3);
-            leftmove = this.nextmove(left,4);
-            // alert("no killer")
-            }
-            else 
+            if(detail[0]==="1")
             {
-              if(this.props.game.killer===detail[0])
-              {
-                // alert(this.props.game.killer===detail[0])
-                upmove  = this.nextmove(up,1);
-                downmove = this.nextmove(down,2);
-                rightmove= this.nextmove(right,3);
-                leftmove = this.nextmove(left,4);
-
-              }
-              
-
+              direction1=2;
+              direction2=2;
+              direction3=2;
+              direction4=2;
             }
+            
+            upmove  = this.nextmove(up,direction1);
+            downmove = this.nextmove(down,direction2);
+            rightmove= this.nextmove(right,direction3);
+            leftmove = this.nextmove(left,direction4);
+            // alert("no killer")
+          
 
 
 
@@ -126,6 +120,7 @@ class BaseGame extends Component
           let pos,posdir;
           let t=true,f=false;
         let switchcase=e.target.value;
+        
         switch(switchcase)
         {
           case 'up': pos=1;
@@ -160,8 +155,9 @@ class BaseGame extends Component
           {
               //up has player
               if(detail[0]==='1'){
-                posdir=down;
-              }
+              pos=2;
+               }
+              
               
               if((this.props.game.gamestate[posdir]!=="0") && (this.props.game.playerchance==='2') )
               {
@@ -217,16 +213,10 @@ class BaseGame extends Component
       abc =() => {
         // console.log(this.state);
         this.winner();
-        if(this.props.game.killer===99)
-        {
+       
           this.props.gamechange(this.state);
           
-        }
-        else if(this.props.game.killer===this.state.boxclicked.split(",")[0])
-        {
-          this.props.gamechange(this.state);
-
-        }
+        
         
         
         
@@ -234,15 +224,20 @@ class BaseGame extends Component
       }
       nextstrike = (index,direct) =>
       {
+        
         let decision=this.props.game.boxes[index].split(",");
+        
         // console.log("decision ",decision);
+        // if(decision[0]==='1'){
+        //     direct=2;
+        //   }
+
         if(this.props.game.gamestate[parseInt(decision[direct])]==='0')
         {
-            if(decision[0]!=='1')
-            {
+            
               return  true;
 
-            }
+            
         }
         
         else
@@ -284,17 +279,24 @@ class BaseGame extends Component
       }
       
       nextmove =(direction,value)=>{
+        console.log("at next movr",direction,value)
+        
+        
         if( (this.props.game.gamestate[direction]==='0')||((this.props.game.gamestate[direction]==='1')&&this.nextstrike(direction,value)) )
         {
           
          return true;
         }
+        return false;
       }
 
 
 
     render()
     {
+     
+
+
         return(
         <React.Fragment>
 
@@ -372,22 +374,22 @@ class BaseGame extends Component
       {this.state.place && <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="place">*place*</button>}
       </div>
       <div className="row">
-      {this.state.up && <button   className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this) } value="up">/\</button>}
+      {this.state.up && <button   className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this) } value="up">/\ up</button>}
       
       </div>
       <div className="row ml-auto mr-auto">
-      {this.state.left &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="left">{"<"}left</button>}
-      {this.state.right &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="right">{">"}right</button>}
+      {this.state.left &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="left">{this.state.boxclicked.split(",")[0]!=='1'?"left":"down"}</button>}
+      {this.state.right &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="right">{">"}right</button>}
       </div>
       <div className="row">
-      {this.state.down &&  <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="down">\/</button>}
+      {this.state.down &&  <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="down">\/ down </button>}
       
       </div>
       
       { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button  className="col ml-auto mr-auto" onClick={this.abc.bind(this)} value="place">makemove</button>}
 
       </div>
-      <Move message={this.state.message} player={this.props.game.playerchance}/>
+      <Move message={this.state.message} player={this.props.game}/>
 
       </React.Fragment>
         )

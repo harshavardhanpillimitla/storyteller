@@ -7,7 +7,7 @@ import BaseGame from './components/basegame';
 class App extends Component{
 
   state={
-    playerchance:'1',
+    playerchance:'2',
     boxes:[
       "0,012,012,012,012",
       "1,3,4,5,6",
@@ -124,7 +124,7 @@ killer:99
         {
           k=this.state.kill;
           kill=k+1;
-          justkilled=true;
+          
           gameplay[parseInt(bridgestate)]='0';
 
         }
@@ -135,31 +135,11 @@ killer:99
           nextchance='2';
         }
         else{
-          if(!justkilled){
-            nextchance='1';
-
-          }
-          else
-          {
-            // alert(this.playerkillchancebonus(parseInt(nextstate)))
-            if(this.playerkillchancebonus(parseInt(nextstate)))
-            {
-              nextchance='2';
-              justkilled=false;
-              killer=nextstate;
-
-            }
-            else
-            {
-              nextchance='1';
-
-            }
-          }
-          
+          nextchance='1';
           
           
         }
-        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay,kill:kill,killer:killer});
+        this.setState({...this.state,playerchance:nextchance,gamestate:gameplay,kill:kill});
 
       }
     }
@@ -186,35 +166,7 @@ killer:99
   }
 
 
-  playerkillchancebonus = (nextstate)=>
-  {
-    let decision=this.state.boxes[nextstate].split(",");
-    let index;
-    let returnvalue=false;
-    decision.map(item => {
-      if((item!=="0")&&(item!==decision[0]))
-      {
-        // console.log(item);
-
-          if( this.state.gamestate[parseInt(item)]==="1" )
-          {
-            index=decision.indexOf(item);
-            if(this.state.boxes[parseInt(item)].split(",")[index]==="0")
-            {
-              returnvalue=true;
-
-            }
-            
-
-          }
-    }
-     
-      
-    });
-    
-    return returnvalue;
-
-  }
+ 
 
 
 
