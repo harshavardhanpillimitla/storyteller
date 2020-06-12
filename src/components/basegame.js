@@ -177,14 +177,14 @@ class BaseGame extends Component
                       // alert("kill available");
                       
                   }
-                  else this.setState({...this.state,up:f});
+                  // else this.setState({...this.state,posdir:f});
 
 
               }else 
               {
                 //up doesnt have player we can move\
                 message="you can move one step above";
-                this.setState({...this.state,currentstate:detail[0],nextstate:detail[pos]});
+                this.setState({...this.state,currentstate:detail[0],nextstate:detail[pos],message});
                 // alert("you can move one step above")
 
               }
@@ -367,17 +367,26 @@ class BaseGame extends Component
           </tr>
         </tbody>
       </table>
+      <div className="container ml-auto mr-auto">
+      <div className="row">
+      {this.state.place && <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="place">*place*</button>}
+      </div>
+      <div className="row">
+      {this.state.up && <button   className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this) } value="up">/\</button>}
       
-      {this.state.place && <button onClick={this.ButtonClick.bind(this)} value="place">place</button>}
-
-      {this.state.up && <button onClick={this.ButtonClick.bind(this) } value="up">Up</button>}
-      {this.state.down &&  <button onClick={this.ButtonClick.bind(this)}value="down">down</button>}
-      {this.state.left &&  <button onClick={this.ButtonClick.bind(this)}value="left">left</button>}
-      {this.state.right &&  <button onClick={this.ButtonClick.bind(this)}value="right">Right</button>}
+      </div>
+      <div className="row ml-auto mr-auto">
+      {this.state.left &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="left">{"<"}left</button>}
+      {this.state.right &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="right">{">"}right</button>}
+      </div>
+      <div className="row">
+      {this.state.down &&  <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="down">\/</button>}
       
-      { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button onClick={this.abc.bind(this)} value="place">changemove</button>}
+      </div>
+      
+      { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button  className="col ml-auto mr-auto" onClick={this.abc.bind(this)} value="place">makemove</button>}
 
-
+      </div>
       <Move message={this.state.message} player={this.props.game.playerchance}/>
 
       </React.Fragment>
