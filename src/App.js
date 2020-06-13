@@ -7,7 +7,7 @@ import BaseGame from './components/basegame';
 class App extends Component{
 
   state={
-    playerchance:'2',
+    playerchance:'1',
     boxes:[
       "0,012,012,012,012",
       "1,3,4,5,6",
