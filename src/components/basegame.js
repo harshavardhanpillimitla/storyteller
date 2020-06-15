@@ -1,5 +1,7 @@
 import React,{Component} from "react";
 import Move from './move';
+import Board from './board';
+import Movement from './movements'
 
 
 
@@ -77,6 +79,7 @@ class BaseGame extends Component
               direction3=2;
               direction4=2;
             }
+
             
             upmove  = this.nextmove(up,direction1);
             downmove = this.nextmove(down,direction2);
@@ -154,13 +157,14 @@ class BaseGame extends Component
           else
           {
               //up has player
-              if(detail[0]==='1'){
-              pos=2;
-               }
+              
               
               
               if((this.props.game.gamestate[posdir]!=="0") && (this.props.game.playerchance==='2') )
               {
+                if(detail[0]==='1'){
+                  pos=2;
+                   }
                 
                   let decision=this.props.game.boxes[posdir].split(",");
 
@@ -188,24 +192,6 @@ class BaseGame extends Component
           }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // console.log("====================",this.state)
-        
-        
       
        
 
@@ -227,11 +213,7 @@ class BaseGame extends Component
         
         let decision=this.props.game.boxes[index].split(",");
         
-        // console.log("decision ",decision);
-        // if(decision[0]==='1'){
-        //     direct=2;
-        //   }
-
+    
         if(this.props.game.gamestate[parseInt(decision[direct])]==='0')
         {
             
@@ -282,7 +264,7 @@ class BaseGame extends Component
         console.log("at next movr",direction,value)
         
         
-        if( (this.props.game.gamestate[direction]==='0')||((this.props.game.gamestate[direction]==='1')&&this.nextstrike(direction,value)) )
+        if( (this.props.game.gamestate[direction]==='0') || ((this.props.game.gamestate[direction]==='1')&&this.nextstrike(direction,value)) )
         {
           
          return true;
@@ -300,96 +282,11 @@ class BaseGame extends Component
         return(
         <React.Fragment>
 
-        <table className="ml-auto mr-auto">
-        <thead>
-          <tr>
-            <th className="m-4 alert alert-info  pl-4 ">0</th>
-            <th className=" alert alert-info  pl-4 mr-4">1</th>
-            <th className=" alert alert-info  pl-4 mr-4">2</th>
-            <th className=" alert alert-info  pl-4 mr-4">3</th>
-            <th className=" alert alert-info  pl-4 mr-4">4</th>
-            <th className=" alert alert-info  pl-4 mr-4">5</th>
-            <th className=" alert alert-info  pl-4 mr-4">6</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="outvar"></td>
-            <td className="outvar"></td>
-            <td className="outvar"></td>
-            <td id="1,3,4,5,6"  className={"m-2"+this.color(1)} onClick={this.onClick.bind(this)}>1</td>
-            <td className="outvar"></td>
-            <td className="outvar"></td>
-            <td className="outvar"></td>
-            
-          </tr>
-          {/* second */}
-          <tr >
-            <td id="2,0,8,3,0"  className={'mt-2'+this.color(2)} onClick={this.onClick.bind(this)}>2</td>
-            <td id="3,1,9,4,2"  className={'mt-2'+this.color(3)} onClick={this.onClick.bind(this)}>3</td>
-            <td id="4,1,10,5,3"  className={'mt-2'+this.color(4)} onClick={this.onClick.bind(this)}>4</td>
-            <td className="outvar"></td>
-            <td id="5,1,11,6,4" className={'mt-2'+this.color(5)} onClick={this.onClick.bind(this)}>5</td>
-            <td id="6,1,12,7,5" className={'mt-2'+this.color(6)} onClick={this.onClick.bind(this)}>6</td>
-            <td id="7,0,13,0,6" className={'mt-2'+this.color(7)} onClick={this.onClick.bind(this)}>7</td>
-            
-          </tr>
-          {/* third */}
-          <tr className="mt-5">
-            <td id="8,2,14,9,0" className={'mt-2'+this.color(8)}  onClick={this.onClick.bind(this)}>8</td>
-            <td id="9,3,15,10,8" className={'mt-2'+this.color(9)} onClick={this.onClick.bind(this)}>9</td>
-            <td id="10,4,16,11,9" className={'mt-2'+this.color(10)} onClick={this.onClick.bind(this)}>10</td>
-            <td className="outvar" ></td>
-            <td id="11,5,17,12,10" className={'mt-2'+this.color(11)} onClick={this.onClick.bind(this)}>11</td>
-            <td id="12,6,18,13,11" className={'mt-2'+this.color(12)} onClick={this.onClick.bind(this)}>12</td>
-            <td id="13,7,19,0,12" className={'mt-2'+this.color(13)} onClick={this.onClick.bind(this)}>13</td>
-            
-          </tr>
-          {/* fourth */}
-          <tr>
-            <td id="14,8,0,15,0" className={'mt-2'+this.color(14)} onClick={this.onClick.bind(this)}>14</td>
-            <td id="15,9,20,16,14" className={'mt-2'+this.color(15)} onClick={this.onClick.bind(this)}>15</td>
-            <td id="16,10,21,17,15" className={'mt-2'+this.color(16)} onClick={this.onClick.bind(this)}>16</td>
-            <td className="outvar"></td>
-            <td id="17,11,22,18,16" className={'mt-2'+this.color(17)} onClick={this.onClick.bind(this)}>17</td>
-            <td id="18,12,23,19,17" className={'mt-2'+this.color(18)} onClick={this.onClick.bind(this)}>18</td>
-            <td id="19,13,0,0,18" className={'mt-2'+this.color(19)} onClick={this.onClick.bind(this)}>19</td>
-            
-          </tr>
-          {/* fifth */}
-          <tr>
-            <td className="outvar"></td>
-            <td id="20,15,0,21,0" className={'mt-2'+this.color(20)} onClick={this.onClick.bind(this)}>20</td>
-            <td id="21,16,0,22,20" className={'mt-2'+this.color(21)} onClick={this.onClick.bind(this)}>21</td>
-            <td className="outvar"></td>
-            <td id="22,17,0,23,21"  className={'mt-2'+this.color(22)} onClick={this.onClick.bind(this)}>22</td>
-            <td id="23,18,0,0,22" className={'mt-2'+this.color(23)} onClick={this.onClick.bind(this)}>23</td>
-            <td className="outvar"></td>
-            
-          </tr>
-        </tbody>
-      </table>
-      <div className="container ml-auto mr-auto">
-      <div className="row">
-      {this.state.place && <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="place">*place*</button>}
-      </div>
-      <div className="row">
-      {this.state.up && <button   className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this) } value="up">/\ up</button>}
+      <Board color={this.color.bind(this)} click={this.onClick.bind(this)}/>
+      <Movement buttonClick={this.ButtonClick.bind(this)}   submit={this.abc.bind(this)} state={this.state}/>
       
-      </div>
-      <div className="row ml-auto mr-auto">
-      {this.state.left &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="left">{this.state.boxclicked.split(",")[0]!=='1'?"left":"down"}</button>}
-      {this.state.right &&  <button className="col6 ml-auto mr-auto" onClick={this.ButtonClick.bind(this)} value="right">{">"}right</button>}
-      </div>
-      <div className="row">
-      {this.state.down &&  <button className="ml-auto mr-auto" onClick={this.ButtonClick.bind(this)}value="down">\/ down </button>}
-      
-      </div>
-      
-      { ((this.state.up)||(this.state.down)||(this.state.right)||(this.state.left))&& <button  className="col ml-auto mr-auto" onClick={this.abc.bind(this)} value="place">makemove</button>}
-
-      </div>
       <Move message={this.state.message} player={this.props.game}/>
+      
 
       </React.Fragment>
         )

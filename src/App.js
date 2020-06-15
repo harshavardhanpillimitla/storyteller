@@ -145,22 +145,7 @@ killer:99
     }
 
 
-    if(this.state.playerchance===currentplayerstatus)
-    {
-      if(currentplayerstatus==='1')
-      {
-        // this.setState({playerchance:'2'});
-        // console.log("2");
-
-      }
-      else
-      {
-        // this.setState({playerchance:'1'});
-        // console.log("1");
-
-      }
-      
-    }
+   
     
     
   }
