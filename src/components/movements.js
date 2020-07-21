@@ -32,7 +32,7 @@ class Movements extends Component {
                         {((this.props.state.up) || (this.props.state.down) || (this.props.state.right) || (this.props.state.left)) && <button className="btn btn-primary col ml-auto mr-auto" onClick={this.props.submit} value="place">makemove</button>}
 
                     </div> : <div className="row">
-                            <button className="btn btn-primary ml-auto mr-auto" onClick={this.props.buttonClick} value="place">wait for your turn</button>}
+                            <button className="btn btn-primary ml-auto mr-auto" onClick={() => { alert(" arey gammuga kurchoradhe vurike nokkamaku jar 30 sec agu") }} value="place">wait for your turn</button>}
                         </div>
                 }
             </div>
