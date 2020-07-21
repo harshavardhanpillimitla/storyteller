@@ -20,7 +20,7 @@ const api = ({ dispatch }) => (next) => async (action) => {
         dispatch({ type: onSuccess, payload: response.data });
       }
     } catch (error) {
-      dispatch(actions.apicallfailed(error.response.status));
+
       if (error.response.status === 400) {
         const out = { out: "incorrect credentials" };
         if (onError) {
