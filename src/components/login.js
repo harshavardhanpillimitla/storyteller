@@ -9,9 +9,13 @@ class Login extends Component {
     email: "",
     password: "",
   };
+  componentDidMount() {
+    localStorage.clear();
+  }
   componentDidUpdate() {
     const token = this.props.user;
     const localtoken = localStorage.getItem("token");
+
 
     if (token && localtoken) {
       this.props.history.replace("/home");

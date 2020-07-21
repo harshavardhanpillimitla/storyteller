@@ -69,7 +69,7 @@ class JOin extends Component {
         console.log(this.props);
         return (
             <div className="container ml-auto mr-auto mt-5">
-                <div className="alert alert-info text-center ">Addplaylist</div>
+                <div className="alert alert-info text-center ">game start </div>
                 {this.props.last && (
                     <div className="form-group alert alert-info text-center">
                         {this.props.last}
@@ -81,7 +81,7 @@ class JOin extends Component {
                 </button>
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div className="form-group">
-                        <label for="exampleInputEmail1">playlist_name</label>
+                        <label for="exampleInputEmail1">enter game join id ask you frnd!!</label>
                         <input
                             type="number"
                             className="form-control"
