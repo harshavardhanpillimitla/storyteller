@@ -259,6 +259,8 @@ class BaseGame extends Component {
           buttonClick={this.ButtonClick.bind(this)}
           submit={this.abc.bind(this)}
           state={this.state}
+          display={this.props.display}
+
         />
 
         <Move message={this.state.message} player={this.props.game} gameid={this.props.gameid} playerid={this.props.playerid} />

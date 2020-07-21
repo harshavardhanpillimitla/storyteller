@@ -5,7 +5,7 @@ class Move extends Component {
 
 
     render() {
-        console.log(this.props.message, this.props.player)
+
 
         return (
             <div className="alert alert-primary" >
