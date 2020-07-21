@@ -171,7 +171,7 @@ class BaseGame extends Component {
 
         let decision = this.props.game.boxes[posdir].split(",");
 
-        // console.log("decision ",decision);
+        //console.log("decision ", decision);
         if (this.props.gamestater[parseInt(decision[pos])] === "0") {
           message = "kill available";
           this.setState({
