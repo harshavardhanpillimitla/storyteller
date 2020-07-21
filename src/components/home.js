@@ -274,7 +274,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} />
+        <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} playerid={this.props.state.playerchance} />
         {!this.props.state.gameid && <Join></Join>}
       </div>
     );

@@ -76,7 +76,7 @@ class BaseGame extends Component {
     if (
       this.props.gamestater[parseInt(detail[0])] !== "0" &&
       this.props.gamestater[parseInt(detail[0])] ===
-      this.props.game.playerchance
+      this.props.playerid
     ) {
       if (detail[0] === "1") {
         direction1 = 2;
@@ -163,7 +163,7 @@ class BaseGame extends Component {
 
       if (
         this.props.gamestater[posdir] !== "0" &&
-        this.props.game.playerchance === "2"
+        this.props.playerid === "2"
       ) {
         if (detail[0] === "1") {
           pos = 2;
@@ -261,7 +261,7 @@ class BaseGame extends Component {
           state={this.state}
         />
 
-        <Move message={this.state.message} player={this.props.game} gameid={this.props.gameid} />
+        <Move message={this.state.message} player={this.props.game} gameid={this.props.gameid} playerid={this.props.playerid} />
       </React.Fragment>
     );
   }
