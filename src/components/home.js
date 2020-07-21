@@ -89,7 +89,7 @@ class App extends Component {
     selectplayer: 0,
   };
 
-  componentDidUpdate() {
+  componentDidMount() {
     const timer = setInterval(() => this.refreshgamepost(), 30000);
   }
   refreshgamepost = () => {
@@ -205,6 +205,19 @@ class App extends Component {
               availablepuls: avlp,
               currentpuls: crp,
             });
+            const gameid = this.props.state.gameid;
+
+            const data = {
+              id: gameid,
+              game: gameplay.join(","),
+              availablemaks: avlm,
+              availablepuli: 3,
+
+              kill: kill,
+              playerchance: "1",
+              user: this.props.user.user.pk,
+            };
+            this.apiCallgamestateupdate(data, gameid)
 
             // console.log(this.state.playerchance,1);
           }
