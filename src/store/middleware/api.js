@@ -1,6 +1,6 @@
 import * as actions from "../actions";
 import axios from "axios";
-const production = "https://backendemployeeapi.herokuapp.com/";
+const production = "https://quiet-gorge-56028.herokuapp.com/";
 const localrun = "http://localhost:8000/";
 
 const api = ({ dispatch }) => (next) => async (action) => {
