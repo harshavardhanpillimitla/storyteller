@@ -148,7 +148,7 @@ class App extends Component {
       let pulstate = this.state.puls.map((state) => {
         return state;
       });
-      let currentplayer = this.state.playerchance;
+      let currentplayer = this.props.state.playerchance;
       let currentplayerstatus = this.state.playerchance;
       let avlm,
         curm,
