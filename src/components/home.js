@@ -90,7 +90,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const timer = setInterval(() => this.refreshgamepost(), 30000);
+    // const timer = setInterval(() => this.refreshgamepost(), 30000);
   }
   refreshgamepost = () => {
 
@@ -274,8 +274,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} playerid={this.props.state.playerchance} display={this.props.state.playerchance === this.props.state.player} />
-        {!this.props.state.gameid && <Join></Join>}
+
+        <div>
+          <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} playerid={this.props.state.playerchance} display={this.props.state.playerchance === this.props.state.player} />
+
+        </div>
+        <div>
+          {!this.props.state.gameid && <Join></Join>}
+        </div>
       </div>
     );
   }
