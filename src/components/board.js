@@ -21,7 +21,7 @@ class Board extends Component {
             <span id="3,1,9,4,2" className={'p-2 mt-2'}> </span>
             <span className="mx-3 outvar"></span>
             <span id="4,1,10,5,3" className={'p-2 mt-2'} > </span>
-            <span id="1,3,4,5,6" className={" p-3 mx-3 outvar" + this.props.color(1)} onClick={this.props.click}>1</span>
+            <span id="1,3,4,5,6" className={" p-3 mx-3 outvar" + this.props.color(1)} onClick={this.props.click}>01</span>
             <span id="5,1,11,6,4" className={'p-2 mt-2'} ></span>
             <span className="mx-3 outvar"></span>
             <span id="6,1,12,7,5" className={'p-2 mt-2'} ></span>

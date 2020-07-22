@@ -280,7 +280,7 @@ class App extends Component {
       <div>
 
         <div>
-          <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} playerid={this.props.state.playerchance} display={this.props.state.playerchance === this.props.state.player} />
+          <BaseGame game={this.state} gamechange={this.onClicked} gamestater={this.props.state.gamestate} gameid={this.props.state.gameid} playerid={this.props.state.playerchance} display={this.props.state.playerchance === this.props.state.player} reduxgame={this.props.state} />
 
         </div>
         <div>

@@ -263,7 +263,7 @@ class BaseGame extends Component {
 
         />
 
-        <Move message={this.state.message} player={this.props.game} gameid={this.props.gameid} playerid={this.props.playerid} />
+        <Move message={this.state.message} player={this.props.game} reduxgame={this.props.reduxgame} gameid={this.props.gameid} playerid={this.props.playerid} />
       </React.Fragment>
     );
   }
