@@ -91,7 +91,9 @@ class App extends Component {
 
   componentDidMount() {
     const timer = setInterval(() => this.refreshgamepost(), 15000);
+
   }
+
   refreshgamepost = () => {
 
     const jwt = localStorage.getItem("token")
