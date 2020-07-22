@@ -90,6 +90,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+
     const timer = setInterval(() => this.refreshgamepost(), 15000);
 
   }
@@ -98,6 +99,7 @@ class App extends Component {
 
     const jwt = localStorage.getItem("token")
     const gameid = localStorage.getItem("id")
+    console.log("hi")
 
     if (jwt) {
 
