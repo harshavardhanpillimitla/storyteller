@@ -90,7 +90,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // const timer = setInterval(() => this.refreshgamepost(), 30000);
+    const timer = setInterval(() => this.refreshgamepost(), 30000);
   }
   refreshgamepost = () => {
 
